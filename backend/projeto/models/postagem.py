@@ -62,17 +62,22 @@ class Postagem(db.Model):
     usuario = db.relationship('Usuario', backref='postagens')
 
     # Comentários associados à postagem
-    comentarios = db.relationship('ComentarioPostagem', back_populates='postagem', cascade='all, delete-orphan')
+    comentarios = db.relationship(
+        'ComentarioPostagem',
+        back_populates='postagem',
+        cascade='all, delete-orphan'
+    )
 
-    # Curtidas associadas à postagem
-    curtidas = db.relationship('Curtida', backref='postagem')
+    # Curtidas associadas à postagem 
+    curtidas = db.relationship(
+        'Curtida',
+        backref='postagem',
+        cascade='all, delete-orphan'
+    )
 
     def to_dict(self):
         """
         Converte o objeto Postagem em um dicionário Python.
-
-        Essa conversão facilita o envio dos dados para o frontend,
-        principalmente em respostas de APIs no formato JSON.
         """
         return {
             "id": self.id,

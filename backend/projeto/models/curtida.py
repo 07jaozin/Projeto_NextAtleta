@@ -1,6 +1,6 @@
 from extension.extensao import db
 from sqlalchemy.sql import func
-from sqlalchemy import UniqueConstraint
+from sqlalchemy import UniqueConstraint, CheckConstraint
 
 class Curtida(db.Model):
     """
@@ -16,6 +16,11 @@ class Curtida(db.Model):
     __table_args__ = (
         UniqueConstraint('usuario_id', 'postagem_id', name='uq_usuario_postagem'),
         UniqueConstraint('usuario_id', 'comentario_id', name='uq_usuario_comentario'),
+        CheckConstraint(
+            '(postagem_id IS NOT NULL AND comentario_id IS NULL) OR '
+            '(postagem_id IS NULL AND comentario_id IS NOT NULL)',
+            name='curtida_apenas_um_item'
+        ),
     )
 
     # Identificador único da curtida
@@ -66,21 +71,12 @@ class Curtida(db.Model):
         onupdate=func.now()
     )
 
-    # Relacionamento com a postagem
-    postagem = db.relationship('Postagem', backref='curtidas')
-
-    # Relacionamento com o comentário
-    comentario = db.relationship('ComentarioPostagem', backref='curtidas')
-
     # Relacionamento com o usuário
     usuario = db.relationship('Usuario', backref='curtidas')
 
     def to_dict(self):
         """
-        Converte o objeto Curtida em um dicionário Python.
-
-        Essa conversão facilita o envio dos dados para o frontend,
-        especialmente em respostas de APIs no formato JSON.
+        Converte o objeto Curtida em um dicionário Python. 
         """
         return {
             "id": self.id,
