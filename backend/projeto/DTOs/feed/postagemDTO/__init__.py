@@ -1,0 +1,5 @@
+from .criarPostagemDTO import CriarPostagemDTO
+from .atualizarPostagemDTO import AtualizarPostagemDTO
+from .detalharPostagemDTO import DetalharPostagemDTO
+from .postagemFeedDTO import PostagemFeedDTO
+from .filtrarPostagemDTO import FiltrarPostagemDTO

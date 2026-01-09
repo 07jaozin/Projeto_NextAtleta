@@ -1,0 +1,2 @@
+from .criarComentarioDTO import CriarComentarioDTO
+from .atualizarComentarioDTO import AtualizarComentarioDTO
