@@ -2,8 +2,12 @@
 venv/
 backend/venv/
 .env
+
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

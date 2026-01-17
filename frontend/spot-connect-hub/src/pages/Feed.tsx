@@ -57,7 +57,7 @@ const Feed = () => {
   return (
     <AppLayout>
       <div className="mx-auto max-w-xl py-6 px-4">
-    
+
 
         {/* Posts */}
         <div className="mt-6 space-y-6">

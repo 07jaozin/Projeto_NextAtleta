@@ -74,15 +74,18 @@ class ComentarioPostagem(db.Model):
     usuario = db.relationship('Usuario', backref='comentarios')
 
     # Relacionamento com comentários filhos (respostas)
-    respostas = db.relationship('ComentarioPostagem',backref=db.backref('comentario_pai', 
-    remote_side=[id]), cascade='all, delete-orphan')
+    respostas = db.relationship(
+        'ComentarioPostagem',
+        backref=db.backref(
+            'comentario_pai',
+            remote_side=[id]
+        ),
+        cascade='all, delete-orphan'
+    )
 
     def to_dict(self):
         """
         Converte o objeto ComentarioPostagem em um dicionário Python.
-
-        Essa conversão facilita o envio dos dados para o frontend,
-        especialmente em respostas de APIs no formato JSON.
         """
         return {
             "id": self.id,

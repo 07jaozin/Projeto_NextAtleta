@@ -19,11 +19,14 @@ def init_app():
     from blueprints.login_bp import login_bp
     from blueprints.perfil_bp import perfil_bp
     from blueprints.mensageria_bp import mensageria_bp
+    from blueprints.feed_bp import feed_bp
     
     app.register_blueprint(cadastro_bp, url_prefix='/cadastrar')
     app.register_blueprint(login_bp, url_prefix='/login')
     app.register_blueprint(perfil_bp, url_prefix='/perfil')
-    app.register_blueprint(mensageria_bp)
+    app.register_blueprint(mensageria_bp, url_prefix='/mensageira')
+    app.register_blueprint(feed_bp, url_prefix='/feed')
+
 
     return app
 
